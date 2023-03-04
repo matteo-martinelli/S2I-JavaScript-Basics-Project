@@ -18,6 +18,14 @@ function getCookie(fieldName) {
 
 // Script body
 //Connection to the frontend elements
+const targetDiv = document.querySelector('#project')
+const decrementTargetDiv = document.querySelector('#button-decrement')
+const incrementTargetDiv = document.querySelector('#button-increment')
+
+const showNumber = document.createElement('p')
+showNumber.textContent = 'Element created via JS'
+targetDiv.append(showNumber)
+
 const incrementButton = document.querySelector('#increment');
 const decrementButton = document.querySelector('#decrement');
 const outputDiv = document.querySelector('#show-number');
