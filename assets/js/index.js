@@ -17,63 +17,78 @@ function getCookie(fieldName) {
 
 
 // Script body
-//Connection to the frontend elements
+//Connection to the frontend element target div
 const targetDiv = document.querySelector('#project')
-const decrementTargetDiv = document.querySelector('#button-decrement')
-const incrementTargetDiv = document.querySelector('#button-increment')
 
-const showNumber = document.createElement('p')
-showNumber.textContent = 'Element created via JS'
-targetDiv.append(showNumber)
+// Creating the decrement button in JS
+const decrementButton = document.createElement('button')
+decrementButton.textContent = '-'
+targetDiv.append(decrementButton)
 
-const incrementButton = document.querySelector('#increment');
-const decrementButton = document.querySelector('#decrement');
-const outputDiv = document.querySelector('#show-number');
-const outputText = outputDiv.textContent;
+// Creating the displayed number and styling it in JS
+const counter = document.createElement('p')
+counter.textContent = '0'
+counter.style.padding = '20px';
+counter.style.fontSize = '40px';
+targetDiv.append(counter)
+
+// Creating the increment button in JS
+const incrementButton = document.createElement('button')
+incrementButton.textContent = '+'
+targetDiv.append(incrementButton)
 
 //Setting of the value to be displayed starting from the cookie setting
 let valueToManipulate;
-
 if(getCookie("lastCounter") == null){
-    valueToManipulate = 0;
+  //If no cookie, start from 0
+  valueToManipulate = 0;
 }
 else {
-    valueToManipulate = parseInt(getCookie("lastCounter"));    
+  //If cookie, start from last value
+  valueToManipulate = parseInt(getCookie("lastCounter"));
 }
 
-outputDiv.textContent = valueToManipulate;
+// Assigning the value got from the cookie in JS
+counter.textContent = valueToManipulate;
 
+// Logging
 console.log(valueToManipulate);
 console.log(typeof(valueToManipulate));
 
-//Setting the cookie expiration time (about one day)
+// Setting the cookie expiration time (about one day)
 const dateTime = new Date();
 const nowTimeStamp = dateTime.getTime(); 
 const expireDateTimeStamp = nowTimeStamp + 3600*24*1000;
 const expireDate = new Date(expireDateTimeStamp).toUTCString();  
 
-//Event listener for value increase
+// Event listener for value increase in JS 
 incrementButton.addEventListener('click', function(event){
-    valueToManipulate++;
-    outputDiv.textContent = valueToManipulate;
-    
-    let cookieContent = "lastCounter=" + valueToManipulate;
-    document.cookie = cookieContent;
-    cookieContent = "expires=" + expireDate;
-    document.cookie = cookieContent;
-    
-    console.log(document.cookie);   
+  // Decrementing the value and displaying it in the frontend
+  valueToManipulate++;
+  counter.textContent = valueToManipulate;
+  
+  // Setting the cookie
+  let cookieContent = "lastCounter=" + valueToManipulate;
+  document.cookie = cookieContent;
+  cookieContent = "expires=" + expireDate;
+  document.cookie = cookieContent;
+  
+  // Logging
+  console.log(document.cookie);   
 });
 
-//Event listener for value decrease
+// Event listener for value decrease in JS
 decrementButton.addEventListener('click', function(event){
-    valueToManipulate--;
-    outputDiv.textContent = valueToManipulate;
-    
-    let cookieContent = "lastCounter=" + valueToManipulate;
-    document.cookie = cookieContent;
-    cookieContent = "expires=" + expireDate;
-    document.cookie = cookieContent;
-    
-    console.log(document.cookie);   
+  // Decrementing the value and displaying it in the frontend
+  valueToManipulate--;
+  counter.textContent = valueToManipulate;
+  
+  // Setting the cookie
+  let cookieContent = "lastCounter=" + valueToManipulate;
+  document.cookie = cookieContent;
+  cookieContent = "expires=" + expireDate;
+  document.cookie = cookieContent;
+  
+  // Logging
+  console.log(document.cookie);
 });
